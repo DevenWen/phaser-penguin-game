@@ -22,8 +22,15 @@ export default class Game extends Phaser.Scene
         })
 
         const tileset = map.addTilesetImage('iceworld', "tiles")
-        map.createLayer('ground', tileset)
+        const ground = map.createLayer('ground', tileset)
+        ground.setCollisionByProperty({
+            collides: true
+        })
 
-        this.cameras.main.scrollY = 300
+        this.matter.world.convertTilemapLayer(ground)
+
+        const {width, height} = this.scale
+
+        this.matter.add.sprite(width * 0.5, height * 0.5, 'penguin')
     }
 }
