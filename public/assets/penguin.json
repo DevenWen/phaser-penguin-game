@@ -65,7 +65,7 @@
 	"sourceSize": {"w":72,"h":64}
 },
 {
-	"filename": "penguin_walk01.png",
+	"filename": "penguin_slide01.png",
 	"frame": {"x":576,"y":0,"w":72,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -73,7 +73,7 @@
 	"sourceSize": {"w":72,"h":64}
 },
 {
-	"filename": "penguin_walk02.png",
+	"filename": "penguin_slide02.png",
 	"frame": {"x":648,"y":0,"w":72,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -81,7 +81,7 @@
 	"sourceSize": {"w":72,"h":64}
 },
 {
-	"filename": "penguin_walk03.png",
+	"filename": "penguin_walk01.png",
 	"frame": {"x":720,"y":0,"w":72,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -89,8 +89,24 @@
 	"sourceSize": {"w":72,"h":64}
 },
 {
-	"filename": "penguin_walk04.png",
+	"filename": "penguin_walk02.png",
 	"frame": {"x":792,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_walk03.png",
+	"frame": {"x":864,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_walk04.png",
+	"frame": {"x":936,"y":0,"w":72,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
@@ -101,8 +117,8 @@
 	"version": "1.0",
 	"image": "penguin.png",
 	"format": "RGBA8888",
-	"size": {"w":864,"h":64},
+	"size": {"w":1008,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:fa78e366910ac030e118be1244c6c722:66ca1a7802d759c03ce7be69e437523f:6811a9a90bad8562d7be890a479a72ac$"
+	"smartupdate": "$TexturePacker:SmartUpdate:9788515beeb4eed5bab43edda4ae7cc4:eb706b9113f3e27b3460cb5b6c192b99:6811a9a90bad8562d7be890a479a72ac$"
 }
 }
