@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+import { ClickOnMeComponent } from '~/components/ClickOnMeComponent'
+import ComponentService from '~/components/ComponentService'
 import PlayerController from './PlayerController'
 
 export default class Game extends Phaser.Scene
@@ -6,6 +8,8 @@ export default class Game extends Phaser.Scene
     private penguin?: Phaser.Physics.Matter.Sprite
     private playerController?: PlayerController
     private cursors?: Phaser.Types.Input.Keyboard.CursorKeys
+
+    private components!: ComponentService
 
     constructor()
     {
@@ -15,6 +19,11 @@ export default class Game extends Phaser.Scene
     init()
     {
         this.cursors = this.input.keyboard.createCursorKeys()
+        this.components = new ComponentService()
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            this.components.destroy()
+        })
     }
 
 
@@ -51,9 +60,8 @@ export default class Game extends Phaser.Scene
 
                     this.playerController = new PlayerController(this.penguin, this.cursors)
 
-                    // this.penguin.setOnCollide((data: MatterJS.ICollisionPair) => {
-                    //     this.isTouchingGroups = true
-                    // })
+                    this.components.addComponent(this.penguin, new ClickOnMeComponent())
+                    
 
                     this.cameras.main.startFollow(this.penguin)
                     break
@@ -70,6 +78,7 @@ export default class Game extends Phaser.Scene
             return
         }
         this.playerController.update(dt)
+        this.components.update(dt)
     }
 
 
