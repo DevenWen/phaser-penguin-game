@@ -15,6 +15,12 @@
 1. https://www.gameartguppy.com/ 一个免费的素材网站
 2. https://kenney.nl/ 部分免费的素材网站
 
+## 项目时间线
+
+* 2021-06-08 23:00
+将 PlayerController 改用 Component Pattern 重构，将 Animation, Movement 的逻辑解耦合。Component Pattern 非常易用，将不同类型的功能拆分研发，整合到一个对象中，适用于较为复杂的游戏 Sprite 的开发。
+
+
 --- 
 
 ![phaser3-parceljs-template](https://user-images.githubusercontent.com/2236153/71606463-37a0da80-2b2e-11ea-9b5f-5d26ccc84f91.png)
