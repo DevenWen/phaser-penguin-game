@@ -1,14 +1,13 @@
 import Phaser from 'phaser'
+import { AnimationComponent } from '~/components/AnimationComponent'
 import { ClickOnMeComponent } from '~/components/ClickOnMeComponent'
 import ComponentService from '~/components/ComponentService'
-import PlayerController from './PlayerController'
+import MoveComponent from '~/components/MoveComponent'
 
 export default class Game extends Phaser.Scene
 {
     private penguin?: Phaser.Physics.Matter.Sprite
-    private playerController?: PlayerController
-    private cursors?: Phaser.Types.Input.Keyboard.CursorKeys
-
+    private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
     private components!: ComponentService
 
     constructor()
@@ -58,11 +57,9 @@ export default class Game extends Phaser.Scene
                 {
                     this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'penguin').setFixedRotation()
 
-                    this.playerController = new PlayerController(this.penguin, this.cursors)
-
+                    this.components.addComponent(this.penguin, new AnimationComponent())
+                    this.components.addComponent(this.penguin, new MoveComponent(this.cursors))
                     this.components.addComponent(this.penguin, new ClickOnMeComponent())
-                    
-
                     this.cameras.main.startFollow(this.penguin)
                     break
                 }
@@ -73,11 +70,6 @@ export default class Game extends Phaser.Scene
 
     update(t: number, dt: number)
     {
-        if (!this.playerController) 
-        {
-            return
-        }
-        this.playerController.update(dt)
         this.components.update(dt)
     }
 

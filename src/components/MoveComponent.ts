@@ -1,19 +1,23 @@
-import Phaser from 'phaser'
-import StateMachine from '../statemachine/StateMachine'
+import StateMachine from "~/statemachine/StateMachine";
+import { IComponent } from "./ComponentService";
 
-export default class PlayerController
+export default class MoveComponent implements IComponent
 {
-    private sprite: Phaser.Physics.Matter.Sprite
-    private stateMachine: StateMachine
+    private sprite!: Phaser.Physics.Matter.Sprite
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys
+    private stateMachine: StateMachine
+    
 
-    constructor(sprite: Phaser.Physics.Matter.Sprite, cursors: Phaser.Types.Input.Keyboard.CursorKeys)
+    constructor(cursors: Phaser.Types.Input.Keyboard.CursorKeys) 
     {
-        this.sprite = sprite
         this.cursors = cursors
         this.stateMachine = new StateMachine(this, "player")
-        this.createAnimation()
+    }
 
+    init(sprite: Phaser.Physics.Matter.Sprite)
+    {
+        console.log(`init moveComponent: ${sprite.name}`)
+        this.sprite = sprite
         this.stateMachine.addState('idle', {
             onEnter: this.idleOnEnter,
             onUpdate: this.idleOnUpdate
@@ -38,9 +42,20 @@ export default class PlayerController
                 this.stateMachine.setState('idle')
             }
         })
+
     }
 
-    update(dt: number) 
+    awake()
+    {
+        console.log("moveComponent awake")
+    }
+
+    start()
+    {
+        console.log("move component start")
+    }
+
+    update(dt: number)
     {
         this.stateMachine.update(dt)
     }
@@ -107,8 +122,8 @@ export default class PlayerController
 
     private jumpOnEnter() 
     {
-        this.sprite.setVelocityY(-12)
         this.sprite.play('player-jump')
+        this.sprite.setVelocityY(-12)
     }
 
     private jumpOnUpdate() 
@@ -145,55 +160,5 @@ export default class PlayerController
             this.stateMachine.setState('jump')
         } 
     }
-
-    private createAnimation()
-    {
-        this.sprite.anims.create({
-            key: "player-idle",
-            frames:[
-                {
-                    key: 'penguin',
-                    frame: 'penguin_walk01.png'
-                }
-            ]
-        })
-
-        this.sprite.anims.create({
-            key: 'player-jump',
-            frameRate: 20,
-            frames: this.sprite.anims.generateFrameNames('penguin', {
-                start: 1,
-                end: 3,
-                prefix: 'penguin_jump0',
-                suffix: '.png'
-            }),
-            repeat: 0
-        })
-
-        this.sprite.anims.create({
-            key: 'player-walk',
-            frameRate: 10,
-            frames: this.sprite.anims.generateFrameNames('penguin', {
-                start: 1,
-                end: 4,
-                prefix: 'penguin_walk0',
-                suffix: '.png'
-            }),
-            repeat: -1
-        })
-
-        this.sprite.anims.create({
-            key: 'player-slide',
-            frameRate: 20,
-            frames: this.sprite.anims.generateFrameNames('penguin', {
-                start: 1, 
-                end: 2,
-                prefix: 'penguin_slide0',
-                suffix: '.png'
-            }),
-            repeat: 0
-        })
-    }
-
 
 }
